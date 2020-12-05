@@ -1,6 +1,8 @@
 package com.solucionexpress.microservicios.commons.alumnos.models.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,9 +14,12 @@ public class Alumno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String apellido;
+    @NotEmpty
+    @Email
     private String email;
 
     @Column(name = "create_At")

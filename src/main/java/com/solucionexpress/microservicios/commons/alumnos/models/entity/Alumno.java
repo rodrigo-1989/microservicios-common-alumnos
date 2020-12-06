@@ -1,5 +1,7 @@
 package com.solucionexpress.microservicios.commons.alumnos.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -24,7 +26,13 @@ public class Alumno implements Serializable {
 
     @Column(name = "create_At")
     private Date createAt;
+    @Lob
+    @JsonIgnore
+    private byte [] foto;
 
+    public Integer getFotoHashCode(){
+        return (this.foto != null )? foto.hashCode() : null;
+    }
     @PrePersist
     public void prePersist(){
         createAt = new Date();
@@ -82,6 +90,12 @@ public class Alumno implements Serializable {
 		
 		return this.id != null && this.id.equals(a.getId());
 	}
-    
-    
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 }
